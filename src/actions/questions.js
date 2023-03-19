@@ -11,20 +11,19 @@ function addQuestion(question) {
   };
 }
 
-export function handleAddQuestion(text, replyingTo) {
+export function handleAddQuestion(question) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
 
     dispatch(showLoading());
 
-    return ;
-
-    // return saveQuestion({
-    //   text,
-    //   author: authedUser,
-    // })
-    //   .then((question) => dispatch(addQuestion(question)))
-    //   .then(() => dispatch(hideLoading()));
+    return saveQuestion({
+      question,
+      author: authedUser,
+    })
+      .then((question) => dispatch(addQuestion(question)))
+      .then(() => dispatch(hideLoading()))
+      // .then(alert("Create a poll successfully!"));
   };
 }
 

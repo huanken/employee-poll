@@ -12,8 +12,6 @@ export default function questions(state = {}, action) {
       return {
         ...state,
         [action.question.id]: action.question,
-        // add question to arr
-        // todo
       };
     default:
       return state;

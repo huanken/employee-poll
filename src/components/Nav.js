@@ -44,11 +44,11 @@ const items = [
 const Nav = () => {
   const navigate = useNavigate();
   const onChange = (key) => {
-    navigate(key)
+    navigate(key);
   };
 
   return (
-    <Tabs items={items} defaultActiveKey={window.location.pathname} onChange={onChange} />
+    <Tabs items={items}  activeKey={window.location.pathname} onChange={onChange} />
   )
 }
 export default Nav;

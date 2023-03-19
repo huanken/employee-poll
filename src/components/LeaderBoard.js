@@ -9,8 +9,7 @@ const Leaderboard = (props) => {
     const [users,] = useState(props.users);
 
     let userArr = [];
-    Object.values(users).forEach(user => userArr.push(user))
-    console.log(userArr);
+    Object.values(props.users).forEach(user => userArr.push(user))
 
     return (
         <>

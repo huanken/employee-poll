@@ -5,13 +5,14 @@ const Dashboard = (props) => {
   return (
     <div>
       <h3 className="center">Dashboard Component</h3>
-      <Question/>
+      {JSON.stringify(props)}
     </div>
   );
 };
 
-const mapStateToProps = ({ questions }) => ({
-  questions
+const mapStateToProps = ({ questions, users }) => ({
+  questions,
+  users
 });
 
 export default connect(mapStateToProps)(Dashboard);

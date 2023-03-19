@@ -1,49 +1,46 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-// import { handleAddTweet } from "../actions/questions";
+import { handleAddQuestion } from "../actions/questions";
 import { useNavigate } from "react-router-dom";
+import { Button, Typography, Form, Input } from 'antd';
+const { Title } = Typography;
 
-const NewQuestion = ({ dispatch, id }) => {
+const NewQuestion = ({ dispatch }) => {
+  const [form] = Form.useForm();
+  const option1 = Form.useWatch("option1", form);
+  const option2 = Form.useWatch("option2", form);
+
   const navigate = useNavigate();
-  const [text, setText] = useState("");
 
-  const handleChange = (e) => {
-    const text = e.target.value;
-
-    setText(text);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // dispatch(handleAddTweet(text, id));
-
-    setText("");
-
-    if (!id) {
-      navigate("/");
+  const handleSubmit = () => {
+    const data = {
+      optionOneText: option1,
+      optionTwoText: option2
     }
-  };
+    dispatch(handleAddQuestion(data)).then(form.resetFields()).then(navigate("/"));
 
-  const questionLeft = 280 - text.length;
+  };
 
   return (
-    <div>
-      <h3 className="center">Compose new Question</h3>
-      {/* <form className="new-tweet" onSubmit={handleSubmit}>
-        <textarea
-          placeholder="What's happening?"
-          value={text}
-          onChange={handleChange}
-          className="textarea"
-          maxLength={280}
-        />
-        {tweetLeft <= 100 && <div className="tweet-length">{tweetLeft}</div>}
-        <button className="btn" type="submit" disabled={text === ""}>
-          Submit
-        </button>
-      </form> */}
-    </div>
+    <>
+      <Title level={2}>Would You Rather</Title>
+      <Title level={4}>Create Your Own Poll</Title>
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={handleSubmit}
+      >
+        <Form.Item label="First Option" name="option1" >
+          <Input placeholder="Option One" />
+        </Form.Item>
+        <Form.Item label="Second Option" name="option2" >
+          <Input placeholder="Option Two"/>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={!(option1 && option2)}>Submit</Button>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 
