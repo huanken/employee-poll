@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { handleAddTweet } from "../actions/tweets";
+// import { handleAddTweet } from "../actions/questions";
 import { useNavigate } from "react-router-dom";
 
-const NewTweet = ({ dispatch, id }) => {
+const NewQuestion = ({ dispatch, id }) => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
 
@@ -16,7 +16,7 @@ const NewTweet = ({ dispatch, id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(handleAddTweet(text, id));
+    // dispatch(handleAddTweet(text, id));
 
     setText("");
 
@@ -25,12 +25,12 @@ const NewTweet = ({ dispatch, id }) => {
     }
   };
 
-  const tweetLeft = 280 - text.length;
+  const questionLeft = 280 - text.length;
 
   return (
     <div>
-      <h3 className="center">Compose new Tweet</h3>
-      <form className="new-tweet" onSubmit={handleSubmit}>
+      <h3 className="center">Compose new Question</h3>
+      {/* <form className="new-tweet" onSubmit={handleSubmit}>
         <textarea
           placeholder="What's happening?"
           value={text}
@@ -42,9 +42,9 @@ const NewTweet = ({ dispatch, id }) => {
         <button className="btn" type="submit" disabled={text === ""}>
           Submit
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };
 
-export default connect()(NewTweet);
+export default connect()(NewQuestion);

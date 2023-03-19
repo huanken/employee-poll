@@ -1,4 +1,4 @@
-# Chirper Project
+# Employee Polls Project
 
 This repo is a code-along with the first project in the React Nanodegree program.
 
