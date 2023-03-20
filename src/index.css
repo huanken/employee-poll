@@ -63,3 +63,35 @@ a {
 .list-item-custom h4{
   margin-top: 0;
 }
+
+.card-col-custom {
+ margin: 10px;
+}
+
+.card-col-custom Button{
+  width: 100%
+ }
+ 
+.question-custom {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-question-row-custom {
+ width:100%;
+}
+
+.card-question-col-custom {
+ width:49%;
+ text-align: center;
+
+}
+
+.card-question-custom > .ant-card-body{
+  padding: 0px;
+}
+
+.card-question-custom Button{
+ width: 100%
+}
