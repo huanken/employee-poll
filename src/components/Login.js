@@ -17,7 +17,7 @@ const Login = (props) => {
             message.success(`Login as ${id}`);
             navigate("/");
         } else {
-            message.error("This users isn't exist");
+            message.error(<span data-testid="error-message">This users isn't exist</span>);
         }
 
     };
@@ -32,7 +32,10 @@ const Login = (props) => {
                 onFinish={handleSubmit}
             >
                 <Form.Item label="Username" name="id" >
-                    <Input placeholder="Username" />
+                    <Input placeholder="Username" id="input-username"/>
+                </Form.Item>
+                <Form.Item label="Password" name="password" >
+                    <Input placeholder="Password" />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" disabled={!id}>Submit</Button>

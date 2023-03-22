@@ -127,7 +127,7 @@ export function _getUsers () {
 
 export function _getQuestions () {
   return new Promise((res, rej) => {
-    setTimeout(() => res({...questions}), 1000)
+    setTimeout(() => res({...questions}), 500)
   })
 }
 
@@ -151,7 +151,11 @@ export function _saveQuestion (data) {
 
   return new Promise((res, rej) => {
     const authedUser = data.author;
-    const formattedQuestion = formatQuestion(data)
+    const formattedQuestion = formatQuestion(data);
+
+    if (formattedQuestion.optionOne.text === undefined || formattedQuestion.optionTwo.text === undefined) {
+      rej('Question format is incorrect');
+    }
 
     setTimeout(() => {
       questions = {
@@ -173,8 +177,12 @@ export function _saveQuestion (data) {
 }
 
 export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
-
   return new Promise((res, rej) => {
+
+    if (!authedUser || !qid || !(answer === 'optionOne' || answer === 'optionTwo') ) {
+      rej('Answer is wrong formatted')
+    }
+
     setTimeout(() => {
       users = {
         ...users,
