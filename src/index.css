@@ -56,22 +56,22 @@ a {
   height: 100px;
 }
 
-.list-item-custom{
+.list-item-custom {
   text-align: left;
 }
 
-.list-item-custom h4{
+.list-item-custom h4 {
   margin-top: 0;
 }
 
 .card-col-custom {
- margin: 10px;
+  margin: 10px;
 }
 
-.card-col-custom Button{
+.card-col-custom Button {
   width: 100%
- }
- 
+}
+
 .question-custom {
   display: flex;
   align-items: center;
@@ -79,19 +79,19 @@ a {
 }
 
 .card-question-row-custom {
- width:100%;
+  width: 100%;
 }
 
 .card-question-col-custom {
- width:49%;
- text-align: center;
+  width: 49%;
+  text-align: center;
 
 }
 
-.card-question-custom > .ant-card-body{
+.card-question-custom>.ant-card-body {
   padding: 0px;
 }
 
-.card-question-custom Button{
- width: 100%
+.card-question-custom Button {
+  width: 100%
 }

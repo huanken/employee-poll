@@ -2,16 +2,10 @@ import { connect } from "react-redux";
 import { Card, Typography, Row, Col, Button } from 'antd';
 import { formatDate } from "../utils/helpers.js";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { handleInitialData } from "../actions/shared";
 
 const { Title } = Typography;
 
-const Dashboard = ({ authedUser, questions, users, dispatch }) => {
-
-    // useEffect(() => {
-    //     dispatch(handleInitialData());
-    // }, []);
+const Dashboard = ({ authedUser, questions, users }) => {
 
     let questionNew = [];
     let questionAnswered = [];
@@ -85,11 +79,10 @@ const Dashboard = ({ authedUser, questions, users, dispatch }) => {
     );
 };
 
-const mapStateToProps = ({ authedUser, questions, users, dispatch }) => ({
+const mapStateToProps = ({ authedUser, questions, users }) => ({
     authedUser,
     questions,
     users,
-    dispatch
 });
 
 export default connect(mapStateToProps)(Dashboard);

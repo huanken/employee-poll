@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, Form, Input } from 'antd';
+import { Button, Typography, Form, Input, message } from 'antd';
 const { Title } = Typography;
 
 const NewQuestion = ({ dispatch }) => {
@@ -17,7 +16,10 @@ const NewQuestion = ({ dispatch }) => {
       optionOneText: option1,
       optionTwoText: option2
     }
-    dispatch(handleAddQuestion(data)).then(form.resetFields()).then(navigate("/"));
+    dispatch(handleAddQuestion(data));
+    form.resetFields();
+    message.success('Poll created!');
+    navigate("/");
 
   };
 
@@ -34,7 +36,7 @@ const NewQuestion = ({ dispatch }) => {
           <Input placeholder="Option One" />
         </Form.Item>
         <Form.Item label="Second Option" name="option2" >
-          <Input placeholder="Option Two"/>
+          <Input placeholder="Option Two" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" disabled={!(option1 && option2)}>Submit</Button>

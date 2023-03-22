@@ -1,12 +1,10 @@
 import { connect } from 'react-redux'
 import { Table, List, Typography, Avatar } from 'antd';
-import { useState } from 'react';
 
 const { Column } = Table;
 const { Title } = Typography;
 
 const Leaderboard = (props) => {
-    const [users,] = useState(props.users);
 
     let userArr = [];
     Object.values(props.users).forEach(user => userArr.push(user))
