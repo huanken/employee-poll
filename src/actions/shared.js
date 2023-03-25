@@ -13,3 +13,12 @@ export function handleInitialData() {
     });
   };
 }
+
+export function refreshData() {
+  return (dispatch) => {
+    return getInitialData().then(({ users, questions }) => {
+      dispatch(receiveUsers(users));
+      dispatch(receiveQuestions(questions));
+    });
+  };
+}

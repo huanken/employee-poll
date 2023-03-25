@@ -1,38 +1,40 @@
 import { connect } from "react-redux";
 import { Card, Typography, Avatar, Row, Col, Button, List, message } from 'antd';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { handleAnswerQuestion } from "../actions/questions";
-import { handleInitialData } from "../actions/shared";
+import { refreshData } from "../actions/shared";
+import { useEffect, useState } from "react";
 
 const { Title } = Typography;
 
 const Question = (props) => {
+
     const { id } = useParams();
-    const navigate = useNavigate();
-    const question = props.questions[id];
+    const [question, setQuestion] = useState(props.questions[id]);
     const owner = props.users[question.author];
     const currentUser = props.users[props.authedUser];
-    const isAnswered = currentUser.answers[question.id] !== undefined;
+    const [isAnswered, setIsAnswer] = useState(currentUser.answers[question.id] !== undefined);
     const userOptionOne = question.optionOne.votes;
     const userOptionTwo = question.optionTwo.votes;
 
-    console.log("userOptionOne", userOptionOne);
-    console.log("userOptionTwo", userOptionTwo);
-
-    const handleAnswer = (e) => {
+    const handleAnswer = async (e) => {
         e.preventDefault();
         const { dispatch, authedUser } = props;
-        dispatch(
+        await dispatch(
             handleAnswerQuestion({
                 qid: question.id,
                 answer: e.target.value,
                 authedUser,
             })
         )
-        props.dispatch(handleInitialData());
-        message.success('Poll Successfully!');
-        navigate('/');
+        message.success('Poll Successfully!');       
+        setIsAnswer(true);
+        await dispatch(refreshData());
     }
+
+    useEffect(() => {
+        setQuestion(props.questions[id]);
+    }, [isAnswered])
 
     return (
         <>

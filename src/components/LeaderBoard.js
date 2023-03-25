@@ -7,7 +7,9 @@ const { Title } = Typography;
 const Leaderboard = (props) => {
 
     let userArr = [];
-    Object.values(props.users).forEach(user => userArr.push(user))
+    Object.values(props.users)
+    .sort((a,b) => (Object.keys(b?.answers).length + b?.questions.length) - (Object.keys(a?.answers).length + a?.questions.length))
+    .forEach(user => userArr.push(user))
 
     return (
         <>

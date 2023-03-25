@@ -26,7 +26,7 @@ const Nav = (props) => {
       ),
     },
     {
-      key: '/new',
+      key: '/add',
       label: (
         <span>
           <AppstoreAddOutlined />
@@ -43,16 +43,21 @@ const Nav = (props) => {
   }
 
   const operation = (
-    <>
-      <span>
-        <Avatar src={props.userLogin.avatarURL} />
-        {props.userLogin.id}
-      </span>
-      <span> </span>
-      <Popconfirm title={'Wanna logout?'} onConfirm={handleLogout} okText={'Yes'} cancelText={'No'}>
-        <Button icon={<LoginOutlined />}>Logout</Button>
-      </Popconfirm>
-    </>
+    props.authedUser === null
+      ?
+      <Button role="buttonLogin" icon={<LoginOutlined />} onClick={() => navigate('/login')}>Login</Button>
+      :
+      <>
+        <span>
+          <Avatar src={props?.userLogin?.avatarURL} />
+          {props?.userLogin?.id}
+        </span>
+        <span> </span>
+        <Popconfirm title={'Wanna logout?'} onConfirm={handleLogout} okText={'Yes'} cancelText={'No'}>
+          <Button icon={<LoginOutlined />}>Logout</Button>
+        </Popconfirm>
+      </>
+
   );
 
   return (
@@ -61,7 +66,8 @@ const Nav = (props) => {
 }
 
 const mapStateToProps = ({ users, authedUser }) => ({
-  userLogin: users[authedUser]
+  userLogin: users[authedUser],
+  authedUser
 });
 
 export default connect(mapStateToProps)(Nav);

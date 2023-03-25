@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Question from "./Question";
 import NewQuestion from "./NewQuestion";
+import NotFound from "./NotFound";
 
 const App = (props) => {
 
@@ -21,14 +22,14 @@ const App = (props) => {
     <Fragment>
       <LoadingBar />
       <div className="container">
-
-        {props.authedUser !== null ? <Nav /> : null}
+        <Nav />
         <Routes>
-          <Route path="/" exact element={props.authedUser !== null ? <Dashboard /> : <Navigate to='/login' />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" exact element={<Dashboard />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/leaderboard" exact element={<Leaderboard />} />
-          <Route path="/question/:id" element={<Question />} />
-          <Route path="/new" element={<NewQuestion />} />
+          <Route path="/question/:id" element={props.authedUser !== null ? <Question /> : <Navigate to='/login' />} />
+          <Route path="/add" element={props.authedUser !== null ? <NewQuestion /> : <Navigate to='/login' />} />
         </Routes>
       </div>
     </Fragment>

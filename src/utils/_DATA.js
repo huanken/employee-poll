@@ -172,7 +172,7 @@ export function _saveQuestion (data) {
       }
 
       res(formattedQuestion)
-    }, 1000)
+    }, 300)
   })
 }
 
@@ -201,12 +201,12 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
           ...questions[qid],
           [answer]: {
             ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser])
+            votes: questions[qid][answer]?.votes?.concat([authedUser])
           }
         }
       }
 
       res()
-    }, 1000)
+    }, 300)
   })
 }

@@ -38,7 +38,7 @@ const Login = (props) => {
                     <Input placeholder="Password" />
                 </Form.Item>
                 <Form.Item>
-                    <Button role="button" type="primary" htmlType="submit" disabled={!id}>Submit</Button>
+                    <Button role="buttonSubmit" type="primary" htmlType="submit" disabled={!id}>Submit</Button>
                 </Form.Item>
             </Form>
         </>
