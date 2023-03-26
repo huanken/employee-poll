@@ -25,9 +25,9 @@ const App = (props) => {
         <Nav />
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" exact element={<Dashboard />} />
+          <Route path="/" exact element={props.authedUser !== null ? <Dashboard /> : <Navigate to='/login' />} />
           <Route path="/login" exact element={<Login />} />
-          <Route path="/leaderboard" exact element={<Leaderboard />} />
+          <Route path="/leaderboard" exact element={props.authedUser !== null ? <Leaderboard /> : <Navigate to='/login' />} />
           <Route path="/question/:id" element={props.authedUser !== null ? <Question /> : <Navigate to='/login' />} />
           <Route path="/add" element={props.authedUser !== null ? <NewQuestion /> : <Navigate to='/login' />} />
         </Routes>

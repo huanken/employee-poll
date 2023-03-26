@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Card, Typography, Row, Col, Button, Radio, Tabs } from 'antd';
+import { Card, Typography, Row, Col, Button, Radio } from 'antd';
 import { formatDate } from "../utils/helpers.js";
 import { Link } from "react-router-dom";
 import { useState } from "react";

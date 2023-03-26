@@ -10,7 +10,7 @@ const Nav = (props) => {
     {
       key: '/',
       label: (
-        <span>
+        <span role="home">
           <HomeOutlined />
           Home
         </span>
@@ -19,7 +19,7 @@ const Nav = (props) => {
     {
       key: '/leaderboard',
       label: (
-        <span>
+        <span role='leaderboard'>
           <OrderedListOutlined />
           Leaderboard
         </span>
@@ -28,7 +28,7 @@ const Nav = (props) => {
     {
       key: '/add',
       label: (
-        <span>
+        <span role='add'>
           <AppstoreAddOutlined />
           New
         </span>
