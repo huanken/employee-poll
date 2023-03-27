@@ -2,20 +2,28 @@ import { connect } from "react-redux";
 import { Card, Typography, Avatar, Row, Col, Button, List, message } from 'antd';
 import { useParams } from "react-router-dom";
 import { handleAnswerQuestion } from "../actions/questions";
-import { refreshData } from "../actions/shared";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const Question = (props) => {
 
+    const navigate = useNavigate();
     const { id } = useParams();
+
+    useEffect(() => {
+        if(!props.questions[id]) {
+            navigate('/404');
+        }
+    }, [id])
+
     const [question, setQuestion] = useState(props.questions[id]);
-    const owner = props.users[question.author];
+    const owner = props.users[question?.author];
     const currentUser = props.users[props.authedUser];
-    const [isAnswered, setIsAnswer] = useState(currentUser.answers[question.id] !== undefined);
-    const userOptionOne = question.optionOne.votes;
-    const userOptionTwo = question.optionTwo.votes;
+    const [isAnswered, setIsAnswer] = useState(currentUser.answers[question?.id] !== undefined);
+    const userOptionOne = question?.optionOne?.votes;
+    const userOptionTwo = question?.optionTwo?.votes;
 
     const handleAnswer = async (e) => {
         e.preventDefault();
@@ -29,7 +37,6 @@ const Question = (props) => {
         )
         message.success('Poll Successfully!');       
         setIsAnswer(true);
-        await dispatch(refreshData());
     }
 
     useEffect(() => {
@@ -42,8 +49,8 @@ const Question = (props) => {
                 isAnswered
                     ?
                     <div className="question-custom" >
-                        <Title level={2}>{`Poll by ${owner.name}`}</Title>
-                        <Avatar size={220} src={`${owner.avatarURL}`} />
+                        <Title level={2}>{`Poll by ${owner?.name}`}</Title>
+                        <Avatar size={220} src={`${owner?.avatarURL}`} />
                         <br /><br /><br />
                         <Row className="card-question-row-custom" justify="space-between">
                             <Col className="card-question-col-custom">
@@ -74,8 +81,8 @@ const Question = (props) => {
                     </div>
                     :
                     <div className="question-custom" >
-                        <Title level={2}>{`Poll by ${owner.name}`}</Title>
-                        <Avatar size={220} src={`${owner.avatarURL}`} />
+                        <Title level={2}>{`Poll by ${owner?.name}`}</Title>
+                        <Avatar size={220} src={`${owner?.avatarURL}`} />
                         <br /><br /><br />
                         <Title level={2}>{`Would You Rather`}</Title>
                         <br /><br />

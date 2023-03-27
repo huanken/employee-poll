@@ -2,11 +2,16 @@ import { Button, Typography, Form, Input, message } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
+import useAuth from "./customHook/useAuth";
+import { useLocation } from "react-router-dom";
 
 const { Title } = Typography;
 
 const Login = (props) => {
+
+    const { login } = useAuth();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const [form] = Form.useForm();
     const id = Form.useWatch("id", form);
@@ -15,7 +20,9 @@ const Login = (props) => {
         if (props.users[id]) {
             props.dispatch(setAuthedUser(id));
             message.success(`Login as ${id}`);
-            navigate("/");
+            login().then(() => {
+                navigate(state?.path || "/");
+            });
         } else {
             message.error("This users isn't exist");
         }
@@ -32,7 +39,7 @@ const Login = (props) => {
                 onFinish={handleSubmit}
             >
                 <Form.Item label="Username" name="id" >
-                    <Input placeholder="Username"/>
+                    <Input placeholder="Username" />
                 </Form.Item>
                 <Form.Item label="Password" name="password" >
                     <Input placeholder="Password" />

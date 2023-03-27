@@ -63,7 +63,7 @@ const Dashboard = ({ authedUser, questions, users }) => {
                                             </div>
                                         }
                                     >
-                                        <Link to={`/question/${question.id}`}>
+                                        <Link to={`/questions/${question.id}`}>
                                             <Button >Show Question</Button>
                                         </Link>
                                     </Card>
@@ -92,7 +92,7 @@ const Dashboard = ({ authedUser, questions, users }) => {
                                                 </div>
                                             </div>}
                                     >
-                                        <Link to={`/question/${question.id}`}>
+                                        <Link to={`/questions/${question.id}`}>
                                             <Button >Show Question</Button>
                                         </Link>
                                     </Card>

@@ -3,6 +3,7 @@ import { Avatar, Tabs, Button, Popconfirm } from 'antd';
 import { HomeOutlined, OrderedListOutlined, AppstoreAddOutlined, LoginOutlined } from "@ant-design/icons"
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
+import useAuth from "./customHook/useAuth";
 
 const Nav = (props) => {
 
@@ -35,15 +36,16 @@ const Nav = (props) => {
       ),
     },
   ];
-
+  const { authed, logout } = useAuth();
   const navigate = useNavigate();
   const handleLogout = () => {
     props.dispatch(setAuthedUser(null));
+    logout();
     navigate('/login');
   }
 
   const operation = (
-    props.authedUser === null
+    (props.authedUser === null || !authed)
       ?
       <Button role="buttonLogin" icon={<LoginOutlined />} onClick={() => navigate('/login')}>Login</Button>
       :

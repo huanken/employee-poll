@@ -24,7 +24,6 @@ export function handleAddQuestion(question) {
     })
       .then((question) => dispatch(addQuestion(question)))
       .then(() => dispatch(hideLoading()))
-    // .then(alert("Create a poll successfully!"));
   };
 }
 

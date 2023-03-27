@@ -4,12 +4,13 @@ import App from './components/App'
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
-import middleware from "./middleware";
+import { middleware } from "./middleware";
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from "react-router-dom";
 import '@testing-library/jest-dom'
 import configureStore from 'redux-mock-store';
-import { mockState, mockStateAuthed } from "./mockstate"
+import { mockState, mockStateAuthed } from "./mockstate";
+
 delete window.matchMedia
 window.matchMedia = (query) => ({
     matches: false,
@@ -155,19 +156,23 @@ describe('testNavigation', () => {
     it('navigation to Login initial', async () => {
         var component2 = render(
             <Provider store={store}>
-                    <Router>
-                        <App />
-                    </Router>
+                <Router>
+                    <App />
+                </Router>
             </Provider>)
         expect(window.location.pathname).toBe('/login');
     });
     it('navigation to pages', async () => {
         var component3 = render(
             <Provider store={store}>
-                    <Router>
-                        <App />
-                    </Router>
+                <Router>
+                    <App />
+                </Router>
             </Provider>)
+        var inputUsername = component3.getByPlaceholderText('Username');
+        fireEvent.change(inputUsername, { target: { value: 'sarahedo' } });
+        var submitButton = component3.getByRole("buttonSubmit");
+        await waitFor(() => fireEvent.click(submitButton))
         fireEvent.click(component3.getByRole('leaderboard'));
         expect(window.location.pathname).toBe('/leaderboard');
         fireEvent.click(component3.getByRole('add'));
